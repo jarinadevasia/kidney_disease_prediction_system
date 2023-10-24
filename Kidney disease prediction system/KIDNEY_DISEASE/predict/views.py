@@ -8,9 +8,8 @@ from django.http import HttpResponse
 
 # Load the trained model
 
-# model = joblib.load("C:\\Users\\MyPc$\\Downloads\\Kidney disease prediction system\\Kidney disease prediction system\\KIDNEY_DISEASE\\predict\\Notebook\\random_forest_model .pkl")
-
-model = joblib.load("C:\\Users\\MyPc$\\Downloads\\Kidney disease prediction system\\Kidney disease prediction system\\KIDNEY_DISEASE\\predict\\Notebook\\random_forest_model.joblib")
+# Define the path to your trained model
+MODEL_PATH = os.path.join(settings.BASE_DIR, 'models', 'random_forest_model.pkl')
 
 def home(request):
     result = None  # Initialize result as None
@@ -31,7 +30,7 @@ def home(request):
                 'Su': [su],
                 'Htn': [htn]
             })
-            prediction = model.predict(input_data)
+            prediction = MODEL_PATH.predict(input_data)
             result = "Has Disease" if prediction[0] == 1 else "Not having Disease"
 
     else:
